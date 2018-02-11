@@ -11,7 +11,7 @@ const secrets = require('./resources/secrets');
 const app = express();
 
 // Setup handlebars view engine
-app.engine('handlebars', handlebars({defaultLayout: 'main'}));
+app.engine('handlebars', handlebars({defaultLayout: 'mainLayout'}));
 app.set('view engine', 'handlebars');
 
 // Static resources
@@ -23,8 +23,10 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 // Cookies
 app.use(cookieParser());
-app.use(expressSession(
-    {secret: secrets.dev.cookie_secret, resave: false, saveUninitialized: false}));
+app.use(expressSession({
+    secret: secrets.dev.cookie_secret,
+    resave: false,
+    saveUninitialized: false}));
 
 // Routing
 const routes = require('./routes');

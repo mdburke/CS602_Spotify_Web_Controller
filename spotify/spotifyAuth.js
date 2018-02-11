@@ -3,6 +3,7 @@ const axios = require('axios');
 const props = require('../resources/appProperties');
 const creds = require('../resources/secrets');
 const queryString = require('querystring');
+const authDbUtil = require('../database/authDbUtil');
 
 // Call Spotify Refresh Token API to obtain new Access Token
 let refreshToken = () => {
@@ -23,6 +24,7 @@ let refreshToken = () => {
         headers: requestHeaders,
         data: requestBody
     }).then(res => {
+        authDbUtil.updateAccessToken(res.data.access_token);
         console.log(res.data);
     }).catch(err => {
         console.log(err);

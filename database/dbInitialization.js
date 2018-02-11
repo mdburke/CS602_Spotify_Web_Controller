@@ -4,7 +4,7 @@
 const connection = require('./dbConnection').getConnection();
 
 // Get Employee constructor/model
-const SpotifyCredential = require('./authDbUtil').getModel();
+const SpotifyCredential = require('./authDbUtil').getModel;
 
 // Get secrets
 const secrets = require('../resources/secrets').dev;
