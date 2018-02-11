@@ -15,7 +15,7 @@ const spotifyCredential = new Schema({
 let model = null;
 let connection = null;
 
-let _getModel = (connection) => {
+let getModel = (connection) => {
     if (connection === null) {      // If no connection yet, create and return a new one.
         console.log("Creating connection and model...");
         connection = require('./dbConnection').getConnection();
@@ -33,13 +33,7 @@ let getConnection = () => {
 };
 
 let updateAccessToken = (accessToken) => {
-    let Credential = _getModel(connection);
-    console.log("called");
-
-    // Credential.update(
-    //     { client_id: secrets.spotify.client_id },
-    //     { $set: { access_token: accessToken } }
-    // );
+    let Credential = getModel(connection);
 
     let response = Credential.findOneAndUpdate(
         { client_id: secrets.spotify.client_id},
@@ -48,12 +42,47 @@ let updateAccessToken = (accessToken) => {
             if (err) throw err;
         }
     );
-    console.log(response);
+};
+
+// Get Access Token from the DB.
+// Returns a Promise
+let getAccessToken = () => {
+    let Credential = getModel(connection);
+
+    return new Promise((fulfill, reject) => {
+        Credential.findOne(
+            { client_id: secrets.spotify.client_id },
+            'access_token'
+        ).then(creds => {
+            fulfill(creds.access_token);
+        }).catch(err => {
+            reject(err);
+        });
+    });
+};
+
+// Get Access Token from the DB.
+// Returns a Promise
+let getRefreshToken = () => {
+    let Credential = getModel(connection);
+
+    return new Promise((fulfill, reject) => {
+        Credential.findOne(
+            { client_id: secrets.spotify.client_id },
+            'refresh_token'
+        ).then(creds => {
+            fulfill(creds.refresh_token);
+        }).catch(err => {
+            reject(err);
+        });
+    });
 };
 
 // Exports
 module.exports = {
-    getModel: _getModel,
+    getModel: getModel,
     getConnection: getConnection,
-    updateAccessToken: updateAccessToken
+    updateAccessToken: updateAccessToken,
+    getAccessToken: getAccessToken,
+    getRefreshToken: getRefreshToken
 };
