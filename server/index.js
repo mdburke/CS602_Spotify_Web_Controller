@@ -5,10 +5,11 @@ const
     cookieParser = require('cookie-parser'),
     expressSession = require('express-session'),
     // We should hold/encrypt the secrets some place else, but for now this is ok...
-    secrets = require('./resources/secrets');
+    secrets = require('../resources/secrets');
 
 module.exports = () => {
     let server = express(),
+        credsCache,
         create,
         start;
 
@@ -44,18 +45,26 @@ module.exports = () => {
         routes.init(server);
     };
 
+    credsCache = require('./database/credsCache');
+
     start = () => {
+
         let hostname = server.get('hostname'),
             port = server.get('port');
 
-        server.listen(port, () => {
-            console.log('Express server listening on - http://' + hostname + ':' + port);
-        });
+        credsCache.populate().then(creds => {
+            console.log('Credentials cache has been populated in local memory');
+            server.listen(port, () => {
+                console.log('Express server listening on - http://' + hostname + ':' + port);
+            });
+        })
+
     };
 
     return {
         server: server,
         create: create,
-        start: start
+        start: start,
+        credsCache: credsCache
     }
 };

@@ -1,9 +1,9 @@
 // Imports
 const axios = require('axios');
-const props = require('../server/resources/appProperties');
-const creds = require('../server/resources/secrets');
+const props = require('../../resources/appProperties');
+const creds = require('../../resources/secrets');
 const queryString = require('querystring');
-const authDbUtil = require('../server/database/authDbUtil');
+const authDbUtil = require('../models/spotifyCredentialModel');
 
 // Call Spotify Refresh Token API to obtain new Access Token
 let refreshAccessToken = () => {

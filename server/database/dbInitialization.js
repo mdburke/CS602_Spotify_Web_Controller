@@ -4,10 +4,10 @@
 const connection = require('./dbConnection').getConnection();
 
 // Get Employee constructor/model
-const SpotifyCredential = require('./authDbUtil').getModel;
+const SpotifyCredential = require('../models/spotifyCredentialModel').getModel;
 
 // Get secrets
-const secrets = require('../resources/secrets').dev;
+const secrets = require('../../resources/secrets').dev;
 
 // On connection open, add the creds to the DB
 connection.on("open", () => {
