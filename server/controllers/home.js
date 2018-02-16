@@ -1,3 +1,5 @@
+const searchService = require('../services/spotifySearchService');
+
 let index = (req, res) => {
     if (!req.session.name) {
         res.redirect('/login');
@@ -20,8 +22,15 @@ let playlist = (req, res) => {
     res.render('playlist', { active: { playlist: true } });
 };
 
-let search = (req, res) => {
-    res.render('search', { active: { search: true } });
+let search = async (req, res) => {
+    let data = JSON.parse(await searchService.search('Roadhouse Blues', 'album'));
+    let albums = data["albums"]["items"];
+    console.log(albums);
+    res.render('search', { active: { search: true }, data: albums });
+};
+
+let postSearch = (req, res) => {
+
 };
 
 module.exports = {
