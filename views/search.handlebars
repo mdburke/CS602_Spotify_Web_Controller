@@ -3,13 +3,28 @@
         <!--<strong></strong>-->
     <!--</form>-->
 
+    <h2>Search by Artist:</h2>
     <table>
         <tr>
-            {{#each data }}
-                <td>
-                    {{ this.name }}
-                </td>
-            {{/each}}
+            <th>
+                Song Title
+            </th>
+            <th>
+                Artist
+            </th>
+            <th>
+                Album
+            </th>
         </tr>
+        {{#each data }}
+        <tr>
+            <td>
+                {{ this.name }}
+            </td>
+            <td>
+                {{ this.artists.[0].name }}
+            </td>
+        </tr>
+        {{/each}}
     </table>
 </div>

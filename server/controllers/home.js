@@ -23,10 +23,10 @@ let playlist = (req, res) => {
 };
 
 let search = async (req, res) => {
-    let data = JSON.parse(await searchService.search('Roadhouse Blues', 'album'));
-    let albums = data["albums"]["items"];
-    console.log(albums);
-    res.render('search', { active: { search: true }, data: albums });
+    let data = JSON.parse(await searchService.search('Roadhouse Blues', 'track'));
+    console.log(data);
+    let tracks = data['tracks']['items'];
+    res.render('search', { active: { search: true }, data: tracks });
 };
 
 let postSearch = (req, res) => {
