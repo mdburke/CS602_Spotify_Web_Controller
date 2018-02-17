@@ -38,5 +38,6 @@ module.exports = {
     getLogin: getLogin,
     postLogin: postLogin,
     playlist: playlist,
-    search: search
+    search: search,
+    postSearch: postSearch
 };

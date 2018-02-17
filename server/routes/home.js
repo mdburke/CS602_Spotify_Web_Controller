@@ -9,6 +9,7 @@ router.get('/login', homeController.getLogin);
 router.post('/login', homeController.postLogin);
 router.get('/playlist', homeController.playlist);
 router.get('/search', homeController.search);
+router.post('/search', homeController.postSearch);
 
 // Temp for testing - yes I know I should write tests instead
 router.get('/refresh', (req, res, next) => {

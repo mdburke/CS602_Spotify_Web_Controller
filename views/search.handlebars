@@ -1,10 +1,16 @@
 <div class="search">
-    <!--<form method="post" action="">-->
-        <!--<strong></strong>-->
-    <!--</form>-->
-
-    <h2>Search by Artist:</h2>
-
+    <form action="/search" method="post">
+        <label for="search_type">Search By: </label>
+        <select name="search_type">
+            <option value="track">Track</option>
+            <option value="artist">Artist</option>
+        </select>
+        <br>
+        <input name="query" type="text" placeholder="Enter Search Terms"/>
+        <input name="submit" type="submit">
+    </form>
+    <br>
+    <h2>Results</h2>
     <table class="table">
         <thead>
         <tr>
@@ -32,10 +38,13 @@
                         {{ this.artists.[0].name }}
                     </td>
                     <td>
-                        {{ this.album }}
+                        {{ this.album.name }}
                     </td>
                     <td>
                         {{ this.external_urls.spotify }}
+                    </td>
+                    <td>
+                        Add to Playlist
                     </td>
                 </tr>
             {{/each}}
