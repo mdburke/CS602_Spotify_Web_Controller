@@ -4,7 +4,9 @@
     <!--</form>-->
 
     <h2>Search by Artist:</h2>
-    <table>
+
+    <table class="table">
+        <thead>
         <tr>
             <th>
                 Song Title
@@ -15,16 +17,28 @@
             <th>
                 Album
             </th>
+            <th>
+                Link
+            </th>
         </tr>
-        {{#each data }}
-        <tr>
-            <td>
-                {{ this.name }}
-            </td>
-            <td>
-                {{ this.artists.[0].name }}
-            </td>
-        </tr>
-        {{/each}}
+        </thead>
+        <tbody>
+            {{#each data }}
+                <tr>
+                    <td>
+                        {{ this.name }}
+                    </td>
+                    <td>
+                        {{ this.artists.[0].name }}
+                    </td>
+                    <td>
+                        {{ this.album }}
+                    </td>
+                    <td>
+                        {{ this.external_urls.spotify }}
+                    </td>
+                </tr>
+            {{/each}}
+        </tbody>
     </table>
 </div>

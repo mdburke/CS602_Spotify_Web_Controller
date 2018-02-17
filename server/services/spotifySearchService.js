@@ -27,9 +27,11 @@ let search = async (query, type) => {
     };
     try {
         response = await rp(options);
-        // console.log(response);
     } catch (error) {
-        console.log(error);
+        if (error.statusCode === 401) {
+            await credsService.refreshAccessToken();
+            response = await rp(options);
+        }
     }
 
     return response;
