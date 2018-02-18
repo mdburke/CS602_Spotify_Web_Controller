@@ -6,7 +6,7 @@ const queryString = require('querystring');
 const authDbUtil = require('../models/spotifyCredentialModel');
 
 // Call Spotify Refresh Token API to obtain new Access Token
-let refreshAccessToken = () => {
+let refreshAccessToken = async () => {
     console.log("Refreshing Spotify Token...");
     let requestBody = queryString.stringify({
         "grant_type": "client_credentials",
@@ -23,8 +23,8 @@ let refreshAccessToken = () => {
         url: props.urls.SPOTIFY_TOKEN,
         headers: requestHeaders,
         data: requestBody
-    }).then(res => {
-        authDbUtil.updateAccessToken(res.data.access_token);
+    }).then(async res => {
+        await authDbUtil.updateAccessToken(res.data.access_token);
         console.log(res.data);
     }).catch(err => {
         console.log(err);

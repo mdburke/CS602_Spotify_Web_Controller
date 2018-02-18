@@ -13,8 +13,7 @@ let getLogin = (req, res) => {
 };
 
 let postLogin = (req, res) => {
-    let name = req.body.name;
-    req.session.name = name;
+    req.session.name = req.body.name;
     res.redirect('/');
 };
 
@@ -28,10 +27,13 @@ let search =  (req, res) => {
 
 let postSearch = async (req, res) => {
     let query = req.body.query;
-    let type = req.body.search_type;
-    let data = JSON.parse(await searchService.search(query, type));
-    let tracks = data.tracks.items;
-    res.render('search', { active: { search: true }, data: tracks });
+    let results = JSON.parse(await searchService.search(query, 'track'));
+    let data = results.tracks.items;
+
+    res.render('search', {
+        active: { search: true },
+        data: data
+    });
 };
 
 module.exports = {

@@ -1,10 +1,7 @@
-const credsModel = require('../models/spotifyCredentialModel');
 const credsService = require('./spotifyCredentialService');
 const props = require('../../resources/appProperties');
 const queryString = require('querystring');
-const axios = require('axios');
 const rp = require('request-promise');
-const request = require('request');
 
 let search = async (query, type) => {
     let queryParams = queryString.encode({

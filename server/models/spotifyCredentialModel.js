@@ -25,6 +25,8 @@ let getModel = (connection) => {
     return model;
 };
 
+let Credential = getModel(connection);
+
 // Return and/or create a db connection
 let getConnection = () => {
     if (connection === null) {      // If no connection yet, create and return a new one.
@@ -36,8 +38,6 @@ let getConnection = () => {
 
 // Update Access Token in DB
 let updateAccessToken = (accessToken) => {
-    let Credential = getModel(connection);
-
     Credential.findOneAndUpdate(
         { client_id: secrets.spotify.client_id},
         { $set: {access_token: accessToken }},
@@ -50,8 +50,6 @@ let updateAccessToken = (accessToken) => {
 // Get Access Token from the DB.
 // Returns a Promise
 let getAccessToken = () => {
-    let Credential = getModel(connection);
-
     return new Promise((fulfill, reject) => {
         Credential.findOne(
             { client_id: secrets.spotify.client_id },
@@ -67,9 +65,7 @@ let getAccessToken = () => {
 // Get Access Token from the DB.
 // Returns a Promise
 let getRefreshToken = () => {
-    let Credential = getModel(connection);
-
-    return new Promise((fulfill, reject) => {
+    return new Promise(async (fulfill, reject) => {
         Credential.findOne(
             { client_id: secrets.spotify.client_id },
             'refresh_token'
