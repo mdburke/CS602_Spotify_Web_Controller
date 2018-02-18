@@ -8,6 +8,8 @@ global.accessToken = null;
 global.refreshToken = null;
 global.client_id = secrets.dev.spotify.client_id;
 global.client_secret = secrets.dev.spotify.client_secret;
+global.user_id = secrets.dev.spotify.user_id;
+global.playlist_id = secrets.dev.spotify.playlist_id;
 
 let populate = () => {
     return new Promise(

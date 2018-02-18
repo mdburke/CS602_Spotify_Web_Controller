@@ -1,15 +1,34 @@
-// Imports
-const axios = require('axios');
-const props = require('../../resources/appProperties');
-const creds = require('../../resources/secrets');
-const queryString = require('querystring');
-const authDbUtil = require('../models/spotifyCredentialModel');
+const
+    axios = require('axios'),
+    props = require('../../resources/appProperties'),
+    creds = require('../../resources/secrets'),
+    queryString = require('querystring'),
+    authDbUtil = require('../models/spotifyCredentialModel');
 
 // Only necessary for testing/dev to get new scopes
 let getNewRefreshAndAccessToken = async () => {
-
+    console.log("Getting new tokens...");
+    return axios({
+        method: 'get',
+        url: props.urls.SPOTIFY_AUTHORIZE + '?' +
+            `client_id=${client_id}` +
+            '&response_type=code' +
+            '&redirect_uri=' + queryString.stringify("http://localhost:3000/callback") +
+            '&scope=' +
+                'user-read-private%20' +
+                'user-read-email%20' +
+                'playlist-read-private%20' +
+                'playlist-modify-private%20' +
+                'user-read-playback-state%20' +
+                'user-modify-playback-state%20' +
+                'user-read-currently-playing%20' +
+                'ugc-image-upload%20'
+    }).then(res => {
+        console.log(res);
+    }).catch(err => {
+        console.log(err);
+    });
 };
-
 
 // Call Spotify Refresh Token API to obtain new Access Token
 let refreshAccessToken = async () => {
@@ -44,6 +63,7 @@ let getBase64EncodedIdAndSecret = () => {
 
 // Exports
 module.exports = {
-    refreshAccessToken: refreshAccessToken
+    refreshAccessToken: refreshAccessToken,
+    getNewRefreshAndAccessToken: getNewRefreshAndAccessToken
 };
 

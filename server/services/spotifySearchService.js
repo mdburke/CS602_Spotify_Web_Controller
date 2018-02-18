@@ -13,10 +13,6 @@ let search = async (query, type) => {
     } catch (error) {
         if (error.statusCode === 401) {
             await credsService.refreshAccessToken();
-            let requestHeaders = {
-                'Content-Type': 'application/x-www-form-urlencoded',
-                'Authorization': "Bearer " + global.accessToken
-            };
             response = await rp(buildRequestOptions(query, type));
         }
     }

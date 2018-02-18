@@ -22,4 +22,9 @@ router.get('/searchTest', (req, res, next) => {
     next();
 });
 
+router.get('/newTokens', (req, res, next) => {
+    require('../services/spotifyCredentialService').getNewRefreshAndAccessToken();
+    next();
+});
+
 module.exports = router;
