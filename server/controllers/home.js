@@ -22,15 +22,16 @@ let playlist = (req, res) => {
     res.render('playlist', { active: { playlist: true } });
 };
 
-let search = async (req, res) => {
-    let data = JSON.parse(await searchService.search('Roadhouse Blues', 'track'));
-    console.log(data);
-    let tracks = data['tracks']['items'];
-    res.render('search', { active: { search: true }, data: tracks });
+let search =  (req, res) => {
+    res.render('search', { active: { search: true}});
 };
 
-let postSearch = (req, res) => {
-
+let postSearch = async (req, res) => {
+    let query = req.body.query;
+    let type = req.body.search_type;
+    let data = JSON.parse(await searchService.search(query, type));
+    let tracks = data.tracks.items;
+    res.render('search', { active: { search: true }, data: tracks });
 };
 
 module.exports = {

@@ -7,8 +7,6 @@ const rp = require('request-promise');
 const request = require('request');
 
 let search = async (query, type) => {
-    console.log("Calling Spotify search API...");
-
     let queryParams = queryString.encode({
         q: query,
         type: type
@@ -18,6 +16,8 @@ let search = async (query, type) => {
         'Content-Type': 'application/x-www-form-urlencoded',
         'Authorization': "Bearer " + global.accessToken
     };
+
+    console.log(`Calling Spotify search API with query ${query} and type ${type}`);
 
     let response;
     let options = {
@@ -35,31 +35,6 @@ let search = async (query, type) => {
     }
 
     return response;
-
-    // const makeRequest = async () => {
-    //     let response;
-    //     let options = {
-    //         method: 'GET',
-    //         uri: props.urls.SPOTIFY_SEARCH + '?' + queryParams,
-    //         headers: requestHeaders
-    //     };
-    //     // try {
-    //         response = await rp(options);
-    //
-    //         console.log(response.statusCode);
-    //
-    //     // } catch (err) {
-    //     //     console.log(err);
-    //         if (response.statusCode === 401) {
-    //             console.log("called refresh");
-    //             await credsService.refreshAccessToken();
-    //             response = await rp(options);
-    //             console.log(response.statusCode);
-    //         }
-    //     // }
-    // };
-    //
-    // makeRequest();
 };
 
 module.exports = {

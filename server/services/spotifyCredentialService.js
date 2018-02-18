@@ -18,7 +18,7 @@ let refreshAccessToken = () => {
         'Authorization': 'Basic ' + getBase64EncodedIdAndSecret()
     };
 
-    axios({
+    return axios({
         method: 'post',
         url: props.urls.SPOTIFY_TOKEN,
         headers: requestHeaders,
