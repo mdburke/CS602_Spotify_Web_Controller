@@ -5,6 +5,12 @@ const creds = require('../../resources/secrets');
 const queryString = require('querystring');
 const authDbUtil = require('../models/spotifyCredentialModel');
 
+// Only necessary for testing/dev to get new scopes
+let getNewRefreshAndAccessToken = async () => {
+
+};
+
+
 // Call Spotify Refresh Token API to obtain new Access Token
 let refreshAccessToken = async () => {
     console.log("Refreshing Spotify Token...");

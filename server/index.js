@@ -48,7 +48,6 @@ module.exports = () => {
     credsCache = require('./database/credsCache');
 
     start = () => {
-
         let hostname = server.get('hostname'),
             port = server.get('port');
 
@@ -58,7 +57,6 @@ module.exports = () => {
                 console.log('Express server listening on - http://' + hostname + ':' + port);
             });
         })
-
     };
 
     return {

@@ -1,7 +1,8 @@
-const credsService = require('./spotifyCredentialService');
-const props = require('../../resources/appProperties');
-const queryString = require('querystring');
-const rp = require('request-promise');
+const
+    credsService = require('./spotifyCredentialService'),
+    props = require('../../resources/appProperties'),
+    queryString = require('querystring'),
+    rp = require('request-promise');
 
 let search = async (query, type) => {
     console.log(`Calling Spotify search API with query ${query} and type ${type}`);
