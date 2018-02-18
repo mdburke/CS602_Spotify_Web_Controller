@@ -1,5 +1,6 @@
-let mongoose = require('mongoose');
-let Schema = mongoose.Schema;
+const
+    mongoose = require('mongoose'),
+    Schema = mongoose.Schema;
 
 let trackSchema = new Schema({
     title: String,

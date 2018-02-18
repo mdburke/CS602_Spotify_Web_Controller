@@ -6,7 +6,6 @@ const
 
 let search = async (query, type) => {
     console.log(`Calling Spotify search API with query ${query} and type ${type}`);
-
     let response;
     try {
         response = await rp(buildRequestOptions(query, type));
@@ -20,6 +19,7 @@ let search = async (query, type) => {
     return response;
 };
 
+// Helper methods
 let buildRequestOptions = (query, type) => {
     let queryParams = queryString.encode({
         q: query,

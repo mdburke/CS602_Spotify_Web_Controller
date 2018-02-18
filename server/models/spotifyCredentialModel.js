@@ -1,8 +1,9 @@
 // Setup mongoose
-const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
+const
+    mongoose = require('mongoose'),
+    Schema = mongoose.Schema,
+    secrets = require('../../resources/secrets').dev;
 mongoose.Promise = global.Promise;
-const secrets = require('../../resources/secrets').dev;
 
 // Create schema
 const spotifyCredential = new Schema({
