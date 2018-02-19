@@ -18,6 +18,7 @@ let getNewRefreshAndAccessToken = async () => {
             '&scope=' +
                 'user-read-private%20' +
                 'user-read-email%20' +
+                'playlist-modify-public%20' +
                 'playlist-read-private%20' +
                 'playlist-modify-private%20' +
                 'user-read-playback-state%20' +

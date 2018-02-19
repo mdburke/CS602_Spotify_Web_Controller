@@ -28,6 +28,8 @@ let addTrackToPlaylist = async (user_id, playlist_id, uris) => {
         if (error.statusCode === 401) {
             await credsService.refreshAccessToken();
             response = await rp(buildGetRequestOptions(user_id, playlist_id, uris));
+        } else {
+            console.log(error);
         }
     }
 
@@ -62,15 +64,15 @@ let buildPostRequestOptions = (user_id, playlist_id, uris) => {
 
     for (let i = 0; i < uris.length; i++) {
         if (i === uris.length - 1) {
-            uriString += queryString.stringify(track)
+            uriString += uris[i];
         } else {
-            uriString += queryString.stringify(track) + ','
+            uriString += uris[i] + ',';
         }
     }
 
     return {
-        method: 'GET',
-        uri: props.urls.SPOTIFY_API + `/users/${user_id}/playlists/${playlist_id}/tracks?uris=${uriString}`,
+        method: 'POST',
+        uri: props.urls.SPOTIFY_API + `/users/${user_id}/playlists/${playlist_id}/tracks?uris=${encodeURIComponent(uriString)}`,
         headers: requestHeaders
     }
 };

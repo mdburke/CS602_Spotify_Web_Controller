@@ -28,8 +28,15 @@ router.get('/newTokens', (req, res, next) => {
 });
 
 router.get('/addTest', (req, res, next) => {
-    console.log(require('../services/spotifyPlaylistService')
-        .addTrackToPlaylist(global.user_id, global.playlist_id, []));
+    require('../services/spotifyPlaylistService')
+        .addTrackToPlaylist(global.user_id,
+            global.playlist_id,
+            ['spotify:track:6b2oQwSGFkzsMtQruIWm2p', 'spotify:track:3SVAN3BRByDmHOhKyIDxfC']
+    ).then(res => {
+        console.log(res);
+    }).catch(err => {
+        console.log(err);
+    });
     next();
 });
 
