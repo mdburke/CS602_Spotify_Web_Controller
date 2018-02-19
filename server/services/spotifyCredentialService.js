@@ -2,6 +2,7 @@ const
     axios = require('axios'),
     props = require('../../resources/appProperties'),
     creds = require('../../resources/secrets'),
+    credsCache = require('../database/credsCache'),
     queryString = require('querystring'),
     authDbUtil = require('../models/spotifyCredentialModel');
 
@@ -50,7 +51,9 @@ let refreshAccessToken = async () => {
         data: requestBody
     }).then(async res => {
         await authDbUtil.updateAccessToken(res.data.access_token);
-        console.log(res.data);
+        await credsCache.populate().then(creds => {
+            console.log('Credentials cache has been populated in local memory');
+        })
     }).catch(err => {
         console.log(err);
     });

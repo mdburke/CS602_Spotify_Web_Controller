@@ -27,4 +27,10 @@ router.get('/newTokens', (req, res, next) => {
     next();
 });
 
+router.get('/addTest', (req, res, next) => {
+    console.log(require('../services/spotifyPlaylistService')
+        .addTrackToPlaylist(global.user_id, global.playlist_id, []));
+    next();
+});
+
 module.exports = router;

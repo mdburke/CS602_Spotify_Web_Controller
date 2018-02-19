@@ -25,8 +25,8 @@ connection.on("open", () => {
 
 
     let playlists = new PlaylistSchema({
-        playlist_id: global.playlist_id,
-        user_id: global.user_id,
+        playlist_id: secrets.spotify.playlist_id,
+        user_id: secrets.spotify.user_id,
         tracks: []
     });
 
