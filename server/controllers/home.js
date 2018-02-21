@@ -23,13 +23,24 @@ let playlist = (req, res) => {
 };
 
 let search =  (req, res) => {
-    res.render('search', { active: { search: true}});
+    res.render('search', { active: { search: true }});
 };
 
 let postSearch = async (req, res) => {
     let query = req.body.query;
     let results = JSON.parse(await searchService.search(query, 'track'));
-    let data = results.tracks.items;
+    let items = results.tracks.items;
+    let data = items.map(item => {
+        return {
+            title: item.name,
+            artist: item["artists"][0].name,
+            imageUri: item.album["images"][0].url,
+            album: item.album.name,
+            trackUri: item.uri,
+            artistUri: item["artists"][0].uri,
+            user: req.session.name
+        }
+    });
 
     res.render('search', {
         active: { search: true },
@@ -38,12 +49,21 @@ let postSearch = async (req, res) => {
 };
 
 let addToPlaylist = async (req, res) => {
-    // TODO: Validate param based on regex?
-    const uri = req.body.uri;
+    const util = require('util');
+    const track = {
+        title: req.body.title,
+        artist: req.body.artist,
+        imageUri: req.body.imageUri,
+        album: req.body.album,
+        trackUri: req.body.trackUri,
+        artistUri: req.body.artistUri,
+        user: req.session.name
+    };
+    // TODO: Validate param based on regex to match spotify uri format
     await playlistService.addTrackToPlaylist(
         global.user_id,
         global.playlist_id,
-        [uri]
+        [track]                                 // Array for future use case of adding multiple tracks
     );
 
     res.redirect('/playlist');

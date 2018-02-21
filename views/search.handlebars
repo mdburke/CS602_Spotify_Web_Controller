@@ -26,17 +26,25 @@
             {{#each data }}
                 <tr>
                     <td>
-                        {{ this.name }}
+                        {{ this.title }}
                     </td>
                     <td>
-                        {{ this.artists.[0].name }}
+                        {{ this.artist }}
                     </td>
                     <td>
-                        {{ this.album.name }}
+                        {{ this.album }}
                     </td>
                     <td>
                         <form action="/playlist" method="post">
-                            <button type="submit" name="uri" value="{{ this.uri }}">
+                            <!--Figure out better way to handle this-->
+                            <input type="hidden" name="title" value="{{ this.title }}" />
+                            <input type="hidden" name="artist" value="{{ this.artist }}" />
+                            <input type="hidden" name="imageUri" value="{{ this.imageUri }}" />
+                            <input type="hidden" name="album" value="{{ this.album }}" />
+                            <input type="hidden" name="trackUri" value="{{ this.trackUri }}" />
+                            <input type="hidden" name="artistUri" value="{{ this.artistUri }}" />
+
+                            <button type="submit" name="submit">
                                 Add To Playlist
                             </button>
                         </form>

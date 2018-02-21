@@ -1,7 +1,7 @@
 const
     credsService = require('./spotifyCredentialService'),
     props = require('../../resources/appProperties'),
-    queryString = require('querystring'),
+    playlistModel = require('../models/playlistModel'),
     rp = require('request-promise');
 
 let getPlaylist = async (user_id, playlist_id) => {
@@ -19,19 +19,27 @@ let getPlaylist = async (user_id, playlist_id) => {
     return response;
 };
 
-let addTrackToPlaylist = async (user_id, playlist_id, uris) => {
+let addTrackToPlaylist = async (user_id, playlist_id, track) => {
     console.log(`Calling Spotify post playlist API with user_id ${user_id} and playlist_id ${playlist_id}`);
     let response;
+    let currentTrack = track[0];
+
+    // TODO: Make the following few actions atomic if somehow possible?
+
+    // Add track to playlist in Spotify
     try {
-        response = await rp(buildPostRequestOptions(user_id, playlist_id, uris));
+        response = await rp(buildPostRequestOptions(user_id, playlist_id, [currentTrack.trackUri]));
     } catch (error) {
         if (error.statusCode === 401) {
             await credsService.refreshAccessToken();
-            response = await rp(buildGetRequestOptions(user_id, playlist_id, uris));
+            response = await rp(buildPostRequestOptions(user_id, playlist_id, [currentTrack.trackUri]));
         } else {
             console.log(error);
         }
     }
+
+    // Add track to database playlist
+    playlistModel.addToPlaylist(currentTrack);
 
     return response;
 };

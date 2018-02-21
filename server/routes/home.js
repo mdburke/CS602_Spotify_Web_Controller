@@ -41,4 +41,23 @@ router.get('/addTest', (req, res, next) => {
     next();
 });
 
+router.get('/testAddToPlaylist', (req, res, next) => {
+    require('../models/playlistModel').addToPlaylist(
+        {
+            title: "testTitle",
+            artist: "artist",
+            imageUri: "image",
+            album: "album",
+            trackUri: "trackUri",
+            artistUri: "artistUri",
+            name: "name"
+        }
+    ).then(res => {
+        console.log(res);
+    }).catch(err => {
+        console.log(err);
+    });
+    next();
+});
+
 module.exports = router;

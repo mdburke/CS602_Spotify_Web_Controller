@@ -1,1 +1,39 @@
-<p>Insert Playlist Function</p>
+<div class="playlist">
+    <h2>Playlist</h2>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>
+                Song Title
+            </th>
+            <th>
+                Artist
+            </th>
+            <th>
+                Album
+            </th>
+            <th>
+                Added By
+            </th>
+        </tr>
+        </thead>
+        <tbody>
+        {{#each data }}
+            <tr>
+                <td>
+                    {{ this.name }}
+                </td>
+                <td>
+                    {{ this.artists.[0].name }}
+                </td>
+                <td>
+                    {{ this.album.name }}
+                </td>
+                <td>
+                    {{ this.user }}
+                </td>
+            </tr>
+        {{/each}}
+        </tbody>
+    </table>
+</div>

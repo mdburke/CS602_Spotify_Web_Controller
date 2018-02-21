@@ -42,7 +42,6 @@ let refreshAccessToken = async () => {
         headers: requestHeaders,
         data: requestBody
     }).then(async res => {
-        console.log(res);
         await authDbUtil.updateAccessToken(res.data.access_token);
         await credsCache.populate().then(creds => {
             console.log('Credentials cache has been populated in local memory');

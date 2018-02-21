@@ -1,5 +1,6 @@
 const
     mongoose = require('mongoose'),
+    dbConnector = require('../database/dbConnector'),
     Schema = mongoose.Schema;
 
 let trackSchema = new Schema({
@@ -9,9 +10,16 @@ let trackSchema = new Schema({
     album: String,
     trackUri: String,
     artistUri: String,
-    user: { type: Schema.Types.ObjectId, ref: 'User' }
+    name: String
+    // user: { type: Schema.Types.ObjectId, ref: 'User' }
 });
 
+// Return the spotifyCredential mongo model
+let getModel = (connection) => {
+    return dbConnector.getModel(trackSchema, 'tracks', connection);
+};
+
 module.exports = {
-    trackSchema: trackSchema
+    trackSchema: trackSchema,
+    getModel: getModel
 };
