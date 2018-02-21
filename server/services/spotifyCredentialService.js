@@ -27,9 +27,8 @@ let getNewRefreshAndAccessToken = async () => {
 let refreshAccessToken = async () => {
     console.log("Refreshing Spotify Token...");
     let requestBody = queryString.stringify({
-        "grant_type": "client_credentials",
-        "refresh_token": creds.dev.spotify.refresh_token,
-        "scope": props.scopes.default
+        "grant_type": "refresh_token",
+        "refresh_token": creds.dev.spotify.refresh_token
     });
 
     let requestHeaders = {
@@ -43,6 +42,7 @@ let refreshAccessToken = async () => {
         headers: requestHeaders,
         data: requestBody
     }).then(async res => {
+        console.log(res);
         await authDbUtil.updateAccessToken(res.data.access_token);
         await credsCache.populate().then(creds => {
             console.log('Credentials cache has been populated in local memory');

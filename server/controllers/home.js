@@ -1,4 +1,5 @@
 const searchService = require('../services/spotifySearchService');
+const playlistService = require('../services/spotifyPlaylistService');
 
 let index = (req, res) => {
     if (!req.session.name) {
@@ -36,11 +37,24 @@ let postSearch = async (req, res) => {
     });
 };
 
+let addToPlaylist = async (req, res) => {
+    // TODO: Validate param based on regex?
+    const uri = req.body.uri;
+    await playlistService.addTrackToPlaylist(
+        global.user_id,
+        global.playlist_id,
+        [uri]
+    );
+
+    res.redirect('/playlist');
+};
+
 module.exports = {
     index: index,
     getLogin: getLogin,
     postLogin: postLogin,
     playlist: playlist,
     search: search,
-    postSearch: postSearch
+    postSearch: postSearch,
+    addToPlaylist: addToPlaylist
 };

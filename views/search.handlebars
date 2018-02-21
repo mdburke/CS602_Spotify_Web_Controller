@@ -19,9 +19,7 @@
             <th>
                 Album
             </th>
-            <th>
-                Link
-            </th>
+            <th>&nbsp;</th>
         </tr>
         </thead>
         <tbody>
@@ -37,10 +35,11 @@
                         {{ this.album.name }}
                     </td>
                     <td>
-                        {{ this.uri }}
-                    </td>
-                    <td>
-                        Add to Playlist
+                        <form action="/playlist" method="post">
+                            <button type="submit" name="uri" value="{{ this.uri }}">
+                                Add To Playlist
+                            </button>
+                        </form>
                     </td>
                 </tr>
             {{/each}}

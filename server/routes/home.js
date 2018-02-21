@@ -8,6 +8,7 @@ router.get('/', homeController.index);
 router.get('/login', homeController.getLogin);
 router.post('/login', homeController.postLogin);
 router.get('/playlist', homeController.playlist);
+router.post('/playlist', homeController.addToPlaylist);
 router.get('/search', homeController.search);
 router.post('/search', homeController.postSearch);
 
