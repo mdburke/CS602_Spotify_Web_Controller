@@ -1,5 +1,5 @@
 const
-    // apiRoute = require('./apis'),
+    apiRoute = require('./api'),
     homeRoute = require('./home');
 
 let init = (server) => {
@@ -9,7 +9,7 @@ let init = (server) => {
         return next();
     });
 
-    // server.use('/api', apiRoute);
+    server.use('/api', apiRoute);
     server.use('/', homeRoute);
 
     server.use((req, res) => {
