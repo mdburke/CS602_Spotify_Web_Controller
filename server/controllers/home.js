@@ -1,12 +1,9 @@
 const searchService = require('../services/spotifySearchService');
 const playlistService = require('../services/spotifyPlaylistService');
+const playlistModel = require('../models/playlistModel');
 
 let index = (req, res) => {
-    if (!req.session.name) {
-        res.redirect('/login');
-    } else {
-        res.render('home', { name: req.session.name, active: { home: true } });
-    }
+    res.render('home', { name: req.session.name, active: { home: true } });
 };
 
 let getLogin = (req, res) => {
@@ -18,8 +15,9 @@ let postLogin = (req, res) => {
     res.redirect('/');
 };
 
-let playlist = (req, res) => {
-    res.render('playlist', { active: { playlist: true } });
+let playlist = async (req, res) => {
+    let data = await playlistModel.getTracksInPlaylist();
+    res.render('playlist', { active: { playlist: true}, data: data.tracks });
 };
 
 let search =  (req, res) => {
@@ -49,7 +47,6 @@ let postSearch = async (req, res) => {
 };
 
 let addToPlaylist = async (req, res) => {
-    const util = require('util');
     const track = {
         title: req.body.title,
         artist: req.body.artist,

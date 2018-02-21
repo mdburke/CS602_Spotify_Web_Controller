@@ -17,7 +17,7 @@ const playlistSchema = new Schema({
         trackUri: String,
         artistUri: String,
         name: String,
-        user: String
+        user: { type: String, default: "anonymous" }
     }]
 });
 
@@ -41,7 +41,14 @@ let addToPlaylist = (track) => {
     );
 };
 
+let getTracksInPlaylist = () => {
+    return Playlist.findOne({ user_id: secrets.spotify.user_id}, err => {
+        if (err) throw err;
+    });
+};
+
 module.exports = {
     getModel: getModel(),
-    addToPlaylist: addToPlaylist
+    addToPlaylist: addToPlaylist,
+    getTracksInPlaylist: getTracksInPlaylist
 };

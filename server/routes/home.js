@@ -4,13 +4,13 @@ const
 
 let router = express.Router();
 
-router.get('/', homeController.index);
+router.get('/', isLoggedIn, homeController.index);
 router.get('/login', homeController.getLogin);
 router.post('/login', homeController.postLogin);
-router.get('/playlist', homeController.playlist);
-router.post('/playlist', homeController.addToPlaylist);
-router.get('/search', homeController.search);
-router.post('/search', homeController.postSearch);
+router.get('/playlist', isLoggedIn, homeController.playlist);
+router.post('/playlist', isLoggedIn, homeController.addToPlaylist);
+router.get('/search', isLoggedIn, homeController.search);
+router.post('/search', isLoggedIn, homeController.postSearch);
 
 // Temp for testing - yes I know I should write tests instead
 router.get('/refresh', (req, res, next) => {
@@ -59,5 +59,13 @@ router.get('/testAddToPlaylist', (req, res, next) => {
     });
     next();
 });
+
+function isLoggedIn(req, res, next) {
+    if (!req.session.name) {
+        res.redirect('/login');
+    } else {
+        next();
+    }
+}
 
 module.exports = router;

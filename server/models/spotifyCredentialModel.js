@@ -28,7 +28,7 @@ let updateAccessToken = (accessToken) => {
     Credential.findOneAndUpdate(
         { client_id: secrets.spotify.client_id},
         { $set: {access_token: accessToken }},
-        (err, creds) => {
+        err => {
             if (err) throw err;
         }
     );
