@@ -8,7 +8,12 @@ let getTracks = () => {
 
 };
 
+let getHistoryByUser = () => {
+
+};
+
 module.exports = {
     getPlaylist: getPlaylist,
-    getTracks: getTracks
+    getTracks: getTracks,
+    getHistoryByUser: getHistoryByUser
 };

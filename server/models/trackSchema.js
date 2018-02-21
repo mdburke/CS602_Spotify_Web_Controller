@@ -8,7 +8,8 @@ let trackSchema = new Schema({
     imageUri: String,
     album: String,
     trackUri: String,
-    artistUri: String
+    artistUri: String,
+    user: { type: Schema.Types.ObjectId, ref: 'User' }
 });
 
 module.exports = {
