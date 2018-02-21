@@ -2,40 +2,26 @@
 const
     mongoose = require('mongoose'),
     Schema = mongoose.Schema,
+    dbConnector = require('../database/dbConnector'),
     secrets = require('../../resources/secrets').dev;
 mongoose.Promise = global.Promise;
 
 // Create schema
-const spotifyCredential = new Schema({
+const spotifyCredentialSchema = new Schema({
     access_token: String,
     refresh_token: String,
     client_id: String,
     client_secret: String
 });
 
-let model = null;
 let connection = null;
 
 // Return the spotifyCredential mongo model
 let getModel = (connection) => {
-    if (connection === null) {      // If no connection yet, create and return a new one.
-        console.log("Creating connection and model...");
-        connection = require('../database/dbConnection').getConnection();
-        model = connection.model("spotifyCredential", spotifyCredential);
-    }
-    return model;
+    return dbConnector.getModel(spotifyCredentialSchema, 'spotifyCredential', connection);
 };
 
 let Credential = getModel(connection);
-
-// Return and/or create a db connection
-let getConnection = () => {
-    if (connection === null) {      // If no connection yet, create and return a new one.
-        console.log("Creating connection...");
-        connection = require('../database/dbConnection').getConnection();
-    }
-    return connection;
-};
 
 // Update Access Token in DB
 let updateAccessToken = (accessToken) => {
@@ -81,7 +67,6 @@ let getRefreshToken = () => {
 // Exports
 module.exports = {
     getModel: getModel,
-    getConnection: getConnection,
     updateAccessToken: updateAccessToken,
     getAccessToken: getAccessToken,
     getRefreshToken: getRefreshToken

@@ -2,7 +2,7 @@
 module.exports = {
     dev: {
         spotify: {
-            access_token: 'xxx'
+            access_token: 'xxx',
             refresh_token:'yyy',
             client_id: 'zzz',
             client_secret: 'aaa'

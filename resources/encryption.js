@@ -1,4 +1,4 @@
-// Work in progress to be finished later into the project to encrypt/decrypt tokens and keys
+// TODO: Work in progress to be finished later into the project to encrypt/decrypt tokens and keys
 
 const crypto = require('crypto');
 const algorithm = 'aes-256-ctr';
