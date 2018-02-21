@@ -14,17 +14,8 @@ let getNewRefreshAndAccessToken = async () => {
         url: props.urls.SPOTIFY_AUTHORIZE + '?' +
             `client_id=${client_id}` +
             '&response_type=code' +
-            '&redirect_uri=' + queryString.stringify("http://localhost:3000/callback") +
-            '&scope=' +
-                'user-read-private%20' +
-                'user-read-email%20' +
-                'playlist-modify-public%20' +
-                'playlist-read-private%20' +
-                'playlist-modify-private%20' +
-                'user-read-playback-state%20' +
-                'user-modify-playback-state%20' +
-                'user-read-currently-playing%20' +
-                'ugc-image-upload%20'
+            '&redirect_uri=' + encodeURIComponent("http://localhost:3000/callback") +
+            '&' + props.scopes.default
     }).then(res => {
         console.log(res);
     }).catch(err => {
@@ -37,7 +28,8 @@ let refreshAccessToken = async () => {
     console.log("Refreshing Spotify Token...");
     let requestBody = queryString.stringify({
         "grant_type": "client_credentials",
-        "refresh_token": creds.dev.spotify.refresh_token
+        "refresh_token": creds.dev.spotify.refresh_token,
+        "scope": props.scopes.default
     });
 
     let requestHeaders = {

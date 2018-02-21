@@ -17,7 +17,6 @@ let populate = () => {
             authDbUtil.getAccessToken()
                 .then(token => {
                     global.accessToken = token;
-                    console.log(global.accessToken);
                     return authDbUtil.getRefreshToken();
                 })
                 .then(token => {
