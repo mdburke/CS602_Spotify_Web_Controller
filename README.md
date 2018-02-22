@@ -1,4 +1,10 @@
 # CS602 Server-Side Web Development Final Project
+## Getting Started
+- Setup Mongodb locally - see Secrets.js for creds/port
+- Run dbInitialization.js to setup DB
+- RUn server.js
+
+
 ## Custom Spotify Web Controller
 
 - Credentials must be placed at resources/secrets.js. See credentials_example.js for format.
