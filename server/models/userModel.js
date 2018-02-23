@@ -1,8 +1,6 @@
 const
     mongoose = require('mongoose'),
     Schema = mongoose.Schema,
-    trackSchema = require('./trackSchema'),
-    UserModel = require('./userModel').getModel,
     dbConnector = require('../database/dbConnector');
 mongoose.Promise = global.Promise;
 

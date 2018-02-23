@@ -1,10 +1,8 @@
 const
     mongoose = require('mongoose'),
     Schema = mongoose.Schema,
-    trackSchema = require('./trackSchema'),
     dbConnector = require('../database/dbConnector');
 mongoose.Promise = global.Promise;
-
 
 // To be used for more advanced applications. P1 is just "add" so we don't need a separate document, we can associate
 // the user to the track directly.

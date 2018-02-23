@@ -17,7 +17,7 @@ let getModel = (schema, name, connection = null) => {
         model = connection.model(name, schema);
     }
     return model;
-}
+};
 
 module.exports = {
     getConnection: getConnection,

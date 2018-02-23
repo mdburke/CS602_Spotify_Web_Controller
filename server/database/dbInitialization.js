@@ -2,7 +2,6 @@
 const
     connection = require('./dbConnector').getConnection(),
     SpotifyCredential = require('../models/spotifyCredentialModel').getModel,
-    TrackSchema = require('../models/trackSchema').trackSchema,
     PlaylistSchema = require('../models/playlistModel').getModel,
     secrets = require('../../resources/secrets').dev;
 
