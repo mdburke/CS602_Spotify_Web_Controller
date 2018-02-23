@@ -1,7 +1,6 @@
 const
     mongoose = require('mongoose'),
     Schema = mongoose.Schema,
-    trackSchema = require('./trackSchema').trackSchema,
     secrets = require('../../resources/secrets').dev;
     dbConnector = require('../database/dbConnector');
 mongoose.Promise = global.Promise;

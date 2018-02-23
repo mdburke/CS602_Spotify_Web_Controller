@@ -20,6 +20,7 @@
     "promise": "^8.0.1",
     "query-string": "^5.0.1",
     "request": "^2.83.0",
-    "request-promise": "^4.2.2"
+    "request-promise": "^4.2.2",
+    "xml": "^1.0.1"
   }
 }
