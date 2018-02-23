@@ -12,7 +12,7 @@ router.post('/playlist', isLoggedIn, homeController.addToPlaylist);
 router.get('/search', isLoggedIn, homeController.search);
 router.post('/search', isLoggedIn, homeController.postSearch);
 
-// Temp for testing - yes I know I should write tests instead
+/**** Temp for manual testing - to be replaced by unit tests *****/
 router.get('/refresh', (req, res, next) => {
     console.log(require('../services/spotifyCredentialService').refreshAccessToken());
     next();
@@ -52,6 +52,17 @@ router.get('/testAddToPlaylist', (req, res, next) => {
             artistUri: "artistUri",
             name: "name"
         }
+    ).then(res => {
+        console.log(res);
+    }).catch(err => {
+        console.log(err);
+    });
+    next();
+});
+
+router.get('/testGetCurrentlyPlaying', (req, res, next) => {
+    require('../services/spotifyPlayerService').getCurrentlyPlaying(
+
     ).then(res => {
         console.log(res);
     }).catch(err => {
