@@ -1,9 +1,23 @@
-const searchService = require('../services/spotifySearchService');
-const playlistService = require('../services/spotifyPlaylistService');
-const playlistModel = require('../models/playlistModel');
+const searchService = require('../services/spotifySearchService'),
+    playlistService = require('../services/spotifyPlaylistService'),
+    playlistModel = require('../models/playlistModel'),
+    playerService = require('../services/spotifyPlayerService'),
+    secrets = require('../../resources/secrets');
 
-let index = (req, res) => {
-    res.render('home', { name: req.session.name, active: { home: true } });
+let index = async (req, res) => {
+    let playing = JSON.parse(await playerService.getCurrentlyPlaying());
+    let title = playing['item']['name'];
+    let artist = playing['item']['artists'][0]['name'];
+    let isJukeboxPlaylist = playing['context']['uri'] === 'spotify:user:' + secrets.dev.spotify.user_id + ':playlist:' + secrets.dev.spotify.playlist_id;
+    res.render('home', {
+        name: req.session.name,
+        active: { home: true },
+        playing: {
+            isJukeboxPlaylist: isJukeboxPlaylist,
+            title: title,
+            artist: artist
+        }
+    });
 };
 
 let getLogin = (req, res) => {

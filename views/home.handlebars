@@ -2,3 +2,8 @@
 <p>Welcome to our wedding jukebox!</p>
 <p>See what's playing next by clicking the 'Playlist' button.</p>
 <p>To search Spotify and add a song, click on the 'Search' button</p>
+{{#if playing.isJukeboxPlaylist }}
+    <strong>Now Playing: </strong><p>{{ playing.title }} by {{ playing.artist }}</p>
+{{ else }}
+    <strong>Wedding Jukebox is not currently playing.</strong>
+{{/if }}
