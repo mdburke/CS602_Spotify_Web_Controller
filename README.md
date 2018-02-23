@@ -16,3 +16,4 @@ For the scope of this project, we have to assume the user cannot add songs to th
 - Use real 'login'
 - Security review - injection, cross-site scripting, etc.
 - Add full support for syncing and history - need a timed job to sync playlist
+- Add access control (username/password? Token?) for the API
