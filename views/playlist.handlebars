@@ -19,15 +19,15 @@
         </thead>
         <tbody>
         {{#each data }}
-            <tr>
+            <tr class="{{#if this.isCurrentlyPlaying }}active{{/if}}">
                 <td>
                     {{ this.title }}
                 </td>
                 <td>
-                    {{ this.artists.[0].name }}
+                    {{ this.artist }}
                 </td>
                 <td>
-                    {{ this.album.name }}
+                    {{ this.album }}
                 </td>
                 <td>
                     {{ this.user }}

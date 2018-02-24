@@ -1,6 +1,7 @@
 // TODO: Add access control (username/password? Token?) for the APIs.
 // TODO: Probably should break this out into a different service and have it behind a separate ELB/SG in AWS
-const playlistModel = require('../models/playlistModel'),
+const
+    playlistModel = require('../models/playlistModel'),
     xml = require('xml');
 
 let getPlaylist = async (req, res) => {
