@@ -36,15 +36,17 @@ let getPlaylist = async (req, res) => {
     let data = await playlistModel.getTracksInPlaylist();
     let playing = JSON.parse(await playerService.getCurrentlyPlaying());
     let current = null;
+    let tracks = null;
 
     // Right now this only works if each track is in playlist ONCE. We need a better solution to solve
     // the same track being in the playlist multiple times. We will need to hold the history/recently played
     // in the DB and sync before calls. If out of sync, we'll return null as something has gone wrong.
-    if (isJukeboxPlaylist(playing['context']['uri'])) {
+    if (data !== null && isJukeboxPlaylist(playing['context']['uri'])) {
+        tracks = data['tracks'];
         for (let i = 0; i < data.tracks.length; i++) {
-            if (data['tracks'][i]['trackUri'] === playing['item']['uri']) {
+            if (tracks[i]['trackUri'] === playing['item']['uri']) {
                 current = i;
-                data['tracks'][i]['isCurrentlyPlaying'] = true;
+                tracks[i]['isCurrentlyPlaying'] = true;
                 break;
             }
         }
@@ -53,7 +55,7 @@ let getPlaylist = async (req, res) => {
 
     res.render('playlist', {
         active: { playlist: true },
-        data: data.tracks,
+        data: tracks,
         current: 'test'
     });
 };
