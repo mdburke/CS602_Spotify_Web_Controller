@@ -7,6 +7,7 @@ let router = express.Router();
 router.get('/', isLoggedIn, homeController.index);
 router.get('/login', homeController.getLogin);
 router.post('/login', homeController.postLogin);
+router.get('/nowPlaying', isLoggedIn, homeController.nowPlaying);
 router.get('/playlist', isLoggedIn, homeController.playlist);
 router.post('/playlist', isLoggedIn, homeController.addToPlaylist);
 router.get('/search', isLoggedIn, homeController.search);

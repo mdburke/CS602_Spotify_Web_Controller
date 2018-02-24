@@ -2,7 +2,6 @@ const
     express = require('express'),
     bodyParser = require('body-parser'),
     handlebars = require('express-handlebars'),
-    cookieParser = require('cookie-parser'),
     expressSession = require('express-session'),
     // We should hold/encrypt the secrets some place else, but for now this is ok...
     secrets = require('../resources/secrets');
@@ -34,11 +33,13 @@ module.exports = () => {
         server.use(express.static('public'));
 
         // Setup Cookies
-        server.use(cookieParser());
         server.use(expressSession({
             secret: secrets.dev.cookie_secret,
             resave: false,
-            saveUninitialized: false
+            saveUninitialized: false,
+            cookie: {
+                maxAge: 1000 * 60 * 60 * 24         // One day in ms
+            }
         }));
 
         // Setup routes

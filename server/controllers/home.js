@@ -20,6 +20,10 @@ let index = async (req, res) => {
     });
 };
 
+let nowPlaying = (req, res) => {
+    res.render('nowPlaying', { active: { nowPlaying: true }})
+};
+
 let getLogin = (req, res) => {
     res.render('login', { layout: 'loginLayout', active: { login: true } });
 };
@@ -87,5 +91,6 @@ module.exports = {
     playlist: playlist,
     search: search,
     postSearch: postSearch,
-    addToPlaylist: addToPlaylist
+    addToPlaylist: addToPlaylist,
+    nowPlaying: nowPlaying
 };
