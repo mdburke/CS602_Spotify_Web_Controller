@@ -5,33 +5,34 @@
     <link rel='stylesheet' href='/stylesheets/bootstrap.css' />
 </head>
 <body>
-<header>
-    <h1>Our Wedding Jukebox!</h1>
-    <nav class="navbar navbar-default">
-        <div class="collapse navbar-collapse" id="templateNavBar">
-            <ul class="nav navbar-nav">
-                <li class="{{#if active.home}}active{{/if}}">
-                    <a class="nav-link" href="/">Home</a>
-                </li>
-                <li class="{{#if active.nowPlaying}}active{{/if}}">
-                    <a class="nav-link" href="/nowPlaying">Now Playing</a>
-                </li>
-                <li class="{{#if active.login}}active{{/if}}">
-                    <a class="nav-link" href="/login">Edit Name</a>
-                </li>
-                <li class="{{#if active.search}}active{{/if}}">
-                    <a class="nav-link" href="/search">Search</a>
-                </li>
-                <li class="{{#if active.playlist}}active{{/if}}">
-                    <a class="nav-link" href="/playlist">Playlist</a>
-                </li>
-            </ul>
-        </div>
-    </nav>
-</header>
+    <div class="container-fluid">
+        <header>
+            <h1>Our Wedding Jukebox!</h1>
+            <nav class="navbar navbar-default">
+                <div class="collapse navbar-collapse" id="templateNavBar">
+                    <ul class="nav navbar-nav">
+                        <li class="{{#if active.home}}active{{/if}}">
+                            <a class="nav-link" href="/">Home</a>
+                        </li>
+                        <li class="{{#if active.nowPlaying}}active{{/if}}">
+                            <a class="nav-link" href="/nowPlaying">Now Playing</a>
+                        </li>
+                        <li class="{{#if active.login}}active{{/if}}">
+                            <a class="nav-link" href="/login">Edit Name</a>
+                        </li>
+                        <li class="{{#if active.search}}active{{/if}}">
+                            <a class="nav-link" href="/search">Search</a>
+                        </li>
+                        <li class="{{#if active.playlist}}active{{/if}}">
+                            <a class="nav-link" href="/playlist">Playlist</a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </header>
 
-{{{body}}}
-
+        {{{body}}}
+    </div>
 </body>
 </html>
 

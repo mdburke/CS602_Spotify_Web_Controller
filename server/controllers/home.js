@@ -12,11 +12,11 @@ let nowPlaying = async (req, res) => {
     let playing = JSON.parse(await playerService.getCurrentlyPlaying());
     let title = playing['item']['name'];
     let artist = playing['item']['artists'][0]['name'];
-    let isJukeboxPlaylist = isJukeboxPlaylist(playing['context']['uri']);
+    let isJukebox = isJukeboxPlaylist(playing['context']['uri']);
     res.render('nowPlaying', {
         active: { nowPlaying: true },
         playing: {
-            isJukeboxPlaylist: isJukeboxPlaylist,
+            isJukeboxPlaylist: isJukebox,
             title: title,
             artist: artist
         }

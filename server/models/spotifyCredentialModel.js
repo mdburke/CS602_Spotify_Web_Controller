@@ -42,7 +42,11 @@ let getAccessToken = () => {
             { client_id: secrets.spotify.client_id },
             'access_token'
         ).then(creds => {
-            fulfill(creds.access_token);
+            if (creds !== null) {
+                fulfill(creds.access_token);
+            } else {
+                fulfill(null);
+            }
         }).catch(err => {
             reject(err);
         });
@@ -57,7 +61,11 @@ let getRefreshToken = () => {
             { client_id: secrets.spotify.client_id },
             'refresh_token'
         ).then(creds => {
-            fulfill(creds.refresh_token);
+            if (creds != null) {
+                fulfill(creds.refresh_token);
+            } else {
+                fulfill(null);
+            }
         }).catch(err => {
             reject(err);
         });
