@@ -1,9 +1,10 @@
 // TODO: Work in progress to be finished later into the project to encrypt/decrypt tokens and keys
 
-const crypto = require('crypto');
-const algorithm = 'aes-256-ctr';
-const iv = new Buffer(crypto.randomBytes(16));
-const key = crypto.randomBytes(32);
+const
+    crypto = require('crypto'),
+    algorithm = 'aes-256-ctr',
+    iv = new Buffer(crypto.randomBytes(16)),
+    key = crypto.randomBytes(32);
 
 let encrypt = (text) => {
     let cipher = crypto.createCipheriv(algorithm, key, iv);

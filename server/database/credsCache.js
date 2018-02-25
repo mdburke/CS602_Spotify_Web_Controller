@@ -1,7 +1,8 @@
 // Class used for pulling the creds from the db at startup and then caching them in memory so we don't
 // need to make a db call every time.
-const authDbUtil = require('../models/spotifyCredentialModel');
-const secrets = require('../../resources/secrets');
+const
+    authDbUtil = require('../models/spotifyCredentialModel'),
+    secrets = require('../../resources/secrets');
 
 // Globals seem the easiest way to handle this for now. TODO: Don't use globals
 global.accessToken = null;

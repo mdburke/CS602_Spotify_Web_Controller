@@ -6,7 +6,7 @@ const
     queryString = require('querystring'),
     authDbUtil = require('../models/spotifyCredentialModel');
 
-// Only necessary for testing/dev to get new scopes
+// Only necessary for testing/dev to get tokens with new scopes
 let getNewRefreshAndAccessToken = async () => {
     console.log("Getting new tokens...");
     return axios({

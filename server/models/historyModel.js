@@ -2,6 +2,7 @@ const
     mongoose = require('mongoose'),
     Schema = mongoose.Schema,
     dbConnector = require('../database/dbConnector');
+
 mongoose.Promise = global.Promise;
 
 // To be used for more advanced applications. P1 is just "add" so we don't need a separate document, we can associate

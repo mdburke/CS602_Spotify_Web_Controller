@@ -52,8 +52,10 @@ module.exports = () => {
         let hostname = server.get('hostname'),
             port = server.get('port');
 
+        // We need to load creds in memory before we start listening for requests
         credsCache.populate().then(creds => {
             console.log('Credentials cache has been populated in local memory');
+
             server.listen(port, () => {
                 console.log('Express server listening on - http://' + hostname + ':' + port);
             });

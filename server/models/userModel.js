@@ -2,6 +2,7 @@ const
     mongoose = require('mongoose'),
     Schema = mongoose.Schema,
     dbConnector = require('../database/dbConnector');
+
 mongoose.Promise = global.Promise;
 
 const userSchema = new Schema({

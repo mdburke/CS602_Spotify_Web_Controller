@@ -3,6 +3,7 @@ const
     Schema = mongoose.Schema,
     secrets = require('../../resources/secrets').dev;
     dbConnector = require('../database/dbConnector');
+
 mongoose.Promise = global.Promise;
 
 const playlistSchema = new Schema({

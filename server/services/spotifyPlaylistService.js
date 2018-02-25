@@ -49,7 +49,7 @@ let buildGetRequestOptions = (user_id, playlist_id) => {
     let requestHeaders = {
         'Content-Type': 'application/json',
         'Accept': 'application/json',
-        'Authorization': "Bearer " + global.accessToken
+        'Authorization': 'Bearer ' + global.accessToken
     };
 
     return {
@@ -65,7 +65,7 @@ let buildPostRequestOptions = (user_id, playlist_id, uris) => {
     let requestHeaders = {
         'Content-Type': 'application/json',
         'Accept': 'application/json',
-        'Authorization': "Bearer " + global.accessToken
+        'Authorization': 'Bearer ' + global.accessToken
     };
 
     let uriString = '';

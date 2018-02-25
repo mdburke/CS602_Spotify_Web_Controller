@@ -1,18 +1,28 @@
-const searchService = require('../services/spotifySearchService'),
+const
+    searchService = require('../services/spotifySearchService'),
     playlistService = require('../services/spotifyPlaylistService'),
     playlistModel = require('../models/playlistModel'),
     playerService = require('../services/spotifyPlayerService'),
     secrets = require('../../resources/secrets');
 
 let index = async (req, res) => {
-    res.render('home', { name: req.session.name, active: { home: true }});
+    res.render('home', {
+        name: req.session.name,
+        active: {
+            home: true
+        }
+    });
 };
 
 let nowPlaying = async (req, res) => {
     let playing = JSON.parse(await playerService.getCurrentlyPlaying());
     let title = playing['item']['name'];
     let artist = playing['item']['artists'][0]['name'];
+
+    // We need to find out if the currently playing spotify item is our specific playlist.
+    // If not, we want to notify the user properly and not say that our playlist is showing.
     let isJukebox = isJukeboxPlaylist(playing['context']['uri']);
+
     res.render('nowPlaying', {
         active: { nowPlaying: true },
         playing: {
@@ -43,6 +53,8 @@ let getPlaylist = async (req, res) => {
     // in the DB and sync before calls. If out of sync, we'll return null as something has gone wrong.
     if (data !== null && isJukeboxPlaylist(playing['context']['uri'])) {
         tracks = data['tracks'];
+
+        // Iterate over the tracks in the playlist so we can find out which one is currently playing and mark it is such
         for (let i = 0; i < data.tracks.length; i++) {
             if (tracks[i]['trackUri'] === playing['item']['uri']) {
                 current = i;
@@ -51,7 +63,6 @@ let getPlaylist = async (req, res) => {
             }
         }
     }
-
 
     res.render('playlist', {
         active: { playlist: true },
@@ -68,6 +79,8 @@ let postSearch = async (req, res) => {
     let query = req.body.query;
     let results = JSON.parse(await searchService.search(query, 'track'));
     let items = results.tracks.items;
+
+    // Map the data into a more usable format
     let data = items.map(item => {
         return {
             title: item.name,
@@ -87,6 +100,7 @@ let postSearch = async (req, res) => {
 };
 
 let addToPlaylist = async (req, res) => {
+    // Turn the request data into a track object
     const track = {
         title: req.body.title,
         artist: req.body.artist,
@@ -96,6 +110,7 @@ let addToPlaylist = async (req, res) => {
         artistUri: req.body.artistUri,
         user: req.session.name
     };
+
     // TODO: Validate param based on regex to match spotify uri format
     await playlistService.addTrackToPlaylist(
         global.user_id,

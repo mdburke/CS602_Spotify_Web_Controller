@@ -1,4 +1,5 @@
-const mongoose = require('mongoose'),
+const
+    mongoose = require('mongoose'),
     creds = require("../../resources/secrets"),
     dbUrl = 'mongodb://' + creds.dev.username +
         ':' + creds.dev.password + '@' + creds.dev.host + ':' + creds.dev.port + '/' + creds.dev.database;

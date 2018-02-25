@@ -4,6 +4,7 @@ const
     Schema = mongoose.Schema,
     dbConnector = require('../database/dbConnector'),
     secrets = require('../../resources/secrets').dev;
+
 mongoose.Promise = global.Promise;
 
 // Create schema
@@ -53,7 +54,7 @@ let getAccessToken = () => {
     });
 };
 
-// Get Access Token from the DB.
+// Get Refresh Token from the DB.
 // Returns a Promise
 let getRefreshToken = () => {
     return new Promise(async (fulfill, reject) => {
@@ -61,7 +62,7 @@ let getRefreshToken = () => {
             { client_id: secrets.spotify.client_id },
             'refresh_token'
         ).then(creds => {
-            if (creds != null) {
+            if (creds !== null) {
                 fulfill(creds.refresh_token);
             } else {
                 fulfill(null);
