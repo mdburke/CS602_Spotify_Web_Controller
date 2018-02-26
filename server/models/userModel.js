@@ -1,3 +1,5 @@
+// Not currently in use. For future use case.
+
 const
     mongoose = require('mongoose'),
     Schema = mongoose.Schema,
@@ -13,18 +15,6 @@ const userSchema = new Schema({
 let getModel = (connection) => {
     return dbConnector.getModel(userSchema, "users", connection);
 };
-
-// let addUser = (name) => {
-//     let user = new UserModel({
-//         name: name
-//     });
-//
-//     user.save(err => {
-//        connection.close();
-//        if (err) throw err;
-//        console.log("Successfully saved user.");
-//     });
-// };
 
 module.exports = {
     getModel: getModel()

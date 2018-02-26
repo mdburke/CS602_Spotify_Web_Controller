@@ -1,3 +1,5 @@
+// Not currently in use. For future use case.
+
 const
     mongoose = require('mongoose'),
     Schema = mongoose.Schema,

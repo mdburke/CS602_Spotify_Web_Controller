@@ -9,7 +9,7 @@ mongoose.Promise = global.Promise;
 const playlistSchema = new Schema({
     playlist_id: String,
     user_id: String,
-    tracks: [{
+    tracks: [{                      // TODO: Get this working with a subdocument "TrackSchema"
         title: String,
         artist: String,
         imageUri: String,
@@ -47,8 +47,20 @@ let getTracksInPlaylist = () => {
     });
 };
 
+let getTracksByName = async (user) => {
+    let tracks = (await getTracksInPlaylist()).tracks;
+    let output = [];
+    tracks.forEach(track => {
+        if (track['user'] === user) {
+            output.push(track);
+        }
+    });
+    return output;
+};
+
 module.exports = {
     getModel: getModel(),
     addToPlaylist: addToPlaylist,
-    getTracksInPlaylist: getTracksInPlaylist
+    getTracksInPlaylist: getTracksInPlaylist,
+    getTracksByName: getTracksByName
 };

@@ -50,8 +50,47 @@ let getPlaylist = async (req, res) => {
     }
 };
 
-let getHistoryByUser = () => {
+let getHistoryByUser = async (req, res) => {
+    let tracks = await playlistModel.getTracksByName(req.params.user);
+    let format = getFormat(req.accepts());
 
+    if (format === 'APPLICATION/JSON') {
+        res.json(tracks);
+    } else if (format === 'APPLICATION/XML') {
+        res.set('Content-Type', 'application/xml');
+
+        let xmlObject = [{ 'tracks': [] }];
+
+        tracks.forEach(track => {
+            xmlObject[0].tracks.push({
+                'track': [
+                    {
+                        'user': track.user
+                    },
+                    {
+                        'title': track.title
+                    },
+                    {
+                        'artist': track.artist
+                    },
+                    {
+                        'imageUri': track.imageUri
+                    },
+                    {
+                        'album': track.album
+                    },
+                    {
+                        'trackUri': track.trackUri
+                    },
+                    {
+                        'artistUri': track.artistUri
+                    }
+                ]
+            });
+        });
+
+        res.send(xml(xmlObject));
+    }
 };
 
 let getFormat = (accepts) => {

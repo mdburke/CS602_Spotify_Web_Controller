@@ -51,7 +51,9 @@ let getPlaylist = async (req, res) => {
     // Right now this only works if each track is in playlist ONCE. We need a better solution to solve
     // the same track being in the playlist multiple times. We will need to hold the history/recently played
     // in the DB and sync before calls. If out of sync, we'll return null as something has gone wrong.
-    if (data !== null && isJukeboxPlaylist(playing['context']['uri'])) {
+    if (data !== null &&
+        playing['context'] !== null &&
+        isJukeboxPlaylist(playing['context']['uri'])) {
         tracks = data['tracks'];
 
         // Iterate over the tracks in the playlist so we can find out which one is currently playing and mark it is such
