@@ -13,40 +13,7 @@ let getPlaylist = async (req, res) => {
     } else if (format === 'APPLICATION/XML') {
         res.set('Content-Type', 'application/xml');
 
-        let xmlObject = [{ 'tracks': [] }];
-
-        data.tracks.forEach(track => {
-            xmlObject[0].tracks.push({
-                'track': [
-                    {
-                        'user': track.user
-                    },
-                    {
-                        'id': track._id
-                    },
-                    {
-                        'title': track.title
-                    },
-                    {
-                        'artist': track.artist
-                    },
-                    {
-                        'imageUri': track.imageUri
-                    },
-                    {
-                        'album': track.album
-                    },
-                    {
-                        'trackUri': track.trackUri
-                    },
-                    {
-                        'artistUri': track.artistUri
-                    }
-                ]
-            });
-        });
-
-        res.send(xml(xmlObject));
+        res.send(formatXMLTracks(data.tracks));
     }
 };
 
@@ -59,37 +26,7 @@ let getHistoryByUser = async (req, res) => {
     } else if (format === 'APPLICATION/XML') {
         res.set('Content-Type', 'application/xml');
 
-        let xmlObject = [{ 'tracks': [] }];
-
-        tracks.forEach(track => {
-            xmlObject[0].tracks.push({
-                'track': [
-                    {
-                        'user': track.user
-                    },
-                    {
-                        'title': track.title
-                    },
-                    {
-                        'artist': track.artist
-                    },
-                    {
-                        'imageUri': track.imageUri
-                    },
-                    {
-                        'album': track.album
-                    },
-                    {
-                        'trackUri': track.trackUri
-                    },
-                    {
-                        'artistUri': track.artistUri
-                    }
-                ]
-            });
-        });
-
-        res.send(xml(xmlObject));
+        res.send(formatXMLTracks(tracks));
     }
 };
 
@@ -107,6 +44,40 @@ let getFormat = (accepts) => {
         }
     }
     return format;
+};
+
+let formatXMLTracks = (tracks) => {
+    let xmlObject = [{ 'tracks': [] }];
+
+    tracks.forEach(track => {
+        xmlObject[0].tracks.push({
+            'track': [
+                {
+                    'user': track.user
+                },
+                {
+                    'title': track.title
+                },
+                {
+                    'artist': track.artist
+                },
+                {
+                    'imageUri': track.imageUri
+                },
+                {
+                    'album': track.album
+                },
+                {
+                    'trackUri': track.trackUri
+                },
+                {
+                    'artistUri': track.artistUri
+                }
+            ]
+        });
+    });
+
+    return xml(xmlObject);
 };
 
 module.exports = {
