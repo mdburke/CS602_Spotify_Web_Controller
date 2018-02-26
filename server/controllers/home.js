@@ -18,10 +18,13 @@ let nowPlaying = async (req, res) => {
     let playing = JSON.parse(await playerService.getCurrentlyPlaying());
     let title = playing['item']['name'];
     let artist = playing['item']['artists'][0]['name'];
+    let isJukebox = false;
 
     // We need to find out if the currently playing spotify item is our specific playlist.
     // If not, we want to notify the user properly and not say that our playlist is showing.
-    let isJukebox = isJukeboxPlaylist(playing['context']['uri']);
+    if (playing['context'] !== null) {
+        isJukebox = isJukeboxPlaylist(playing['context']['uri']);
+    }
 
     res.render('nowPlaying', {
         active: { nowPlaying: true },
@@ -51,17 +54,17 @@ let getPlaylist = async (req, res) => {
     // Right now this only works if each track is in playlist ONCE. We need a better solution to solve
     // the same track being in the playlist multiple times. We will need to hold the history/recently played
     // in the DB and sync before calls. If out of sync, we'll return null as something has gone wrong.
-    if (data !== null &&
-        playing['context'] !== null &&
-        isJukeboxPlaylist(playing['context']['uri'])) {
+    if (data !== null) {
         tracks = data['tracks'];
 
-        // Iterate over the tracks in the playlist so we can find out which one is currently playing and mark it is such
-        for (let i = 0; i < data.tracks.length; i++) {
-            if (tracks[i]['trackUri'] === playing['item']['uri']) {
-                current = i;
-                tracks[i]['isCurrentlyPlaying'] = true;
-                break;
+        if (playing['context'] !== null && isJukeboxPlaylist(playing['context']['uri'])) {
+            // Iterate over the tracks in the playlist so we can find out which one is currently playing and mark it is such
+            for (let i = 0; i < data.tracks.length; i++) {
+                if (tracks[i]['trackUri'] === playing['item']['uri']) {
+                    current = i;
+                    tracks[i]['isCurrentlyPlaying'] = true;
+                    break;
+                }
             }
         }
     }

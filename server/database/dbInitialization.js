@@ -1,7 +1,7 @@
 // Only used to initialize the database with the creds/etc. when first created
 const
     connection = require('./dbConnector').getConnection(),
-    SpotifyCredential = require('../models/spotifyCredentialModel').getModel,
+    SpotifyCredential = require('../models/spotifyCredentialModel').getModel(),
     PlaylistSchema = require('../models/playlistModel').getModel,
     secrets = require('../../resources/secrets').dev;
 
@@ -32,7 +32,7 @@ connection.on("open", () => {
     playlists.save(err => {
         connection.close();
         if (err) throw err;
-        console.log("Successfully added playlist doc to database");
+        console.log("Successfully added playlist  to database");
         process.exit(0);
     });
 });

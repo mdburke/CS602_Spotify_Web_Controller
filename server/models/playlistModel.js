@@ -35,7 +35,6 @@ let addToPlaylist = (track) => {
         { $push: {tracks: track }},
         (err, res) => {
             if (err) throw err;
-            console.log(res);
             return res;
         }
     );

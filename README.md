@@ -1,7 +1,7 @@
 # CS602 Server-Side Web Development Final Project
 ## Getting Started
-- Setup Mongodb locally - see Secrets.js for creds/port
-- Run dbInitialization.js to setup DB
+- Setup Mongodb locally - see Secrets.js for creds/port (for CS602, this is the standard creds)
+- Run dbInitialization.js to setup DB collections
 - Run server.js
 
 
