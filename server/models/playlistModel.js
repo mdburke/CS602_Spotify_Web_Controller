@@ -49,6 +49,9 @@ let getTracksInPlaylist = () => {
 let getTracksByName = async (user) => {
     let tracks = (await getTracksInPlaylist()).tracks;
     let output = [];
+
+    // Handling this logic in mongo seemed MUCH more complicated than doing it myself here. Perhaps
+    // there is some performance gain to be had that way but for this use case should be fine.
     tracks.forEach(track => {
         if (track['user'] === user) {
             output.push(track);

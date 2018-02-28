@@ -12,6 +12,9 @@ let getCurrentlyPlaying = async () => {
         if (error.statusCode === 401) {
             await credsService.refreshAccessToken();
             response = await rp(buildRequest());
+        } else {
+            console.log(error);
+            response = error;
         }
     }
 

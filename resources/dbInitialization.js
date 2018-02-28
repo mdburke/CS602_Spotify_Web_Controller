@@ -1,9 +1,9 @@
 // Only used to initialize the database with the creds/etc. when first created
 const
-    connection = require('./dbConnector').getConnection(),
-    SpotifyCredential = require('../models/spotifyCredentialModel').getModel(),
-    PlaylistSchema = require('../models/playlistModel').getModel,
-    secrets = require('../../resources/secrets').dev;
+    connection = require('../server/database/dbConnector').getConnection(),
+    SpotifyCredential = require('../server/models/spotifyCredentialModel').getModel(),
+    PlaylistSchema = require('../server/models/playlistModel').getModel,
+    secrets = require('./secrets').dev;
 
 
 // On connection open, add the creds to the DB
