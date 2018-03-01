@@ -3,7 +3,7 @@ const
     mongoose = require('mongoose'),
     Schema = mongoose.Schema,
     dbConnector = require('../database/dbConnector'),
-    secrets = require('../../resources/secrets').dev;
+    secrets = require('../../resources/secrets').dev;   // TODO: Handle env config better
 
 mongoose.Promise = global.Promise;
 
